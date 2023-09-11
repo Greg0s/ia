@@ -1,50 +1,110 @@
 let generations = [];
 const size = 30; //taille d'une cellule
-let ruleset = []; //regle 30
+let ruleset = [];
 let rowsNb;
 let currentGen = 0;
 const rowLength = 33;
 let yOffset = 0;
 let ruleNb = 0;
+let mode = "centered";
 
 function setup() {
-  const canva = createCanvas(1000, 600);
+  // création du canva
+  let width;
+  if (window.innerWidth > 1000) width = 1000;
+  else width = window.innerWidth;
+  const canva = createCanvas(width, 600);
   canva.id("canva");
-
-  randomRuleset();
-
-  //remplir la 1ere génération avec des cellules aléatoires
-  let generation = [];
-  generation = Array(floor(width / size)).fill(0);
-  generation[floor(generation.length / 2)] = 1; // Place une cellule active au centre
-
-  generations.push(generation);
 
   frameRate(10);
 
-  document.querySelector("h1").innerHTML += "Rule " + ruleNb;
+  init();
+  update();
+}
+
+function init() {
+  // initialisation des variables
+  generations = [];
+  currentGen = 0;
+  ruleNb = 0;
+  yOffset = 0;
+}
+
+function update() {
+  updateRule();
+  updateState();
+}
+
+function updateRule() {
+  // règle aléatoire
+  randomRuleset();
+  document.querySelector("h1").innerHTML = "Rule " + ruleNb; // règle aléatoire
+}
+
+function updateState() {
+  // remplir la 1ère génération
+  let generation = setInitialState(mode);
+  generations.push(generation);
+}
+
+function generate() {
+  init();
+  update();
+  draw();
 }
 
 function draw() {
-  background("#FFFFCC");
+  clear();
 
   // dessine les cases
-  drawCurrentGen();
+  drawAllGen();
 
   // calcule la génération suivante
   calculateNextGen();
 }
 
 function randomRuleset() {
+  // génère une règle aléatoire
   for (let i = 0; i < 8; i++) {
     if (Math.random() < 0.5) {
       ruleset[i] = 0;
     } else ruleset[i] = 1;
+
     ruleNb += ruleset[i] * Math.pow(2, i);
   }
 }
 
-function drawCurrentGen() {
+function setInitialState(mode) {
+  let generation = [];
+  generation = Array(floor(width / size)).fill(0);
+
+  // Place une cellule active au centre
+  if (mode == "centered") {
+    generation[floor(generation.length / 2)] = 1;
+  } else if (mode == "random") {
+    // Génère une ligne aléatoire
+    for (let i = 0; i < generation.length; i++) {
+      if (Math.random() < 0.5) {
+        generation[i] = 0;
+      } else generation[i] = 1;
+    }
+  }
+  return generation;
+}
+
+function setMode() {
+  const toggle = document.querySelector("input");
+  if (toggle.checked) mode = "random";
+  else {
+    mode = "centered";
+  }
+  init();
+  updateState();
+  draw();
+}
+
+function drawAllGen() {
+  // dessine la génération entière
   for (let i = 0; i <= currentGen; i++) {
     for (let j = 0; j < rowLength; j++) {
       if (generations[i][j] === 1) {
@@ -61,21 +121,28 @@ function calculateNextGen() {
   let generation = generations[currentGen];
 
   for (let i = 0; i < generation.length; i++) {
-    let left = generation[i - 1];
-    let me = generation[i];
-    let right = generation[i + 1];
-    nextGeneration[i] = applyRule(left, me, right); // Applique la règle 30
+    let left, current, right;
+
+    // gestion des bords
+    if (generation[i - 1]) left = generation[i - 1];
+    else left = generation[generation.length - 1];
+
+    current = generation[i];
+
+    if (generation[i + 1]) right = generation[i + 1];
+    else right = generation[0];
+
+    nextGeneration[i] = applyRule(left, current, right); // Applique la règle
   }
   currentGen++;
-  if (currentGen == 17) noLoop();
 
   generations[currentGen] = nextGeneration; // Met à jour la génération actuelle
 
   yOffset += size;
 }
 
-// Appliquer la règle 30
-function applyRule(left, me, right) {
-  let index = left * 4 + me * 2 + right * 1; // Convertit les valeurs en binaire
+// Appliquer la règle
+function applyRule(left, current, right) {
+  let index = left * 4 + current * 2 + right * 1; // Convertit les valeurs en binaire
   return ruleset[index]; // Renvoie la valeur de la règle à l'index
 }

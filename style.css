@@ -1,9 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap");
 
+/* INIT */
+
+body,
+h1,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* VAR */
+
+:root {
+  --pink: #fae;
+  --yellow: #ffffcc;
+
+  --custom-font: "Mouse Memoirs", sans-serif;
+}
+
+/* STYLING */
+
 body {
-  background-color: #ffffcc;
-  font-family: "Mouse Memoirs", sans-serif;
-  color: #fae;
+  background-color: var(--yellow);
+  font-family: var(--custom-font);
+  color: var(--pink);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 #canva {
@@ -21,4 +44,96 @@ footer {
   text-align: center;
   font-size: 2rem;
   opacity: 0.55;
+  margin-bottom: 2rem;
+}
+
+.generate {
+  display: block;
+  margin: auto;
+  padding: 0.25rem 0.5rem;
+
+  border: solid 3px var(--pink);
+  border-radius: 1rem;
+
+  color: var(--pink);
+  background-color: var(--yellow);
+
+  font-family: var(--custom-font);
+  font-size: 2.2rem;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.generate:hover {
+  border-radius: 1.3rem;
+
+  color: var(--yellow);
+  background-color: var(--pink);
+}
+
+.toggle-box {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+}
+
+.mode-label {
+  font-size: 2rem;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: block;
+  width: 3.75rem;
+  height: 2.125rem;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--pink);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--yellow);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
