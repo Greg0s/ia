@@ -1,18 +1,21 @@
-let generations = [];
+// constantes
 const size = 30; //taille d'une cellule
+const rowLength = 33; // nb de cellule par ligne
+
+// variables
+let generations = [];
 let ruleset = [];
-let rowsNb;
+
 let currentGen = 0;
-const rowLength = 33;
 let yOffset = 0;
+
 let ruleNb = 0;
 let mode = "centered";
 
 function setup() {
   // création du canva
   let width;
-  if (window.innerWidth > 1000) width = 1000;
-  else width = window.innerWidth;
+  width = Math.min(window.innerWidth, 1000);
   const canva = createCanvas(width, 600);
   canva.id("canva");
 
@@ -124,13 +127,18 @@ function calculateNextGen() {
     let left, current, right;
 
     // gestion des bords
-    if (generation[i - 1]) left = generation[i - 1];
-    else left = generation[generation.length - 1];
+    if (i === 0) {
+      left = generation[generation.length - 1];
+      right = generation[i + 1];
+    } else if (i === generation.length - 1) {
+      left = generation[i - 1];
+      right = generation[0];
+    } else {
+      left = generation[i - 1];
+      right = generation[i + 1];
+    }
 
     current = generation[i];
-
-    if (generation[i + 1]) right = generation[i + 1];
-    else right = generation[0];
 
     nextGeneration[i] = applyRule(left, current, right); // Applique la règle
   }
