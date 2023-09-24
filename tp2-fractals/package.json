@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "camera-controls": "^2.7.2",
+    "three": "^0.156.1"
+  },
+  "devDependencies": {
+    "dat.gui": "^0.7.9",
+    "vite": "^4.4.9"
+  }
+}
