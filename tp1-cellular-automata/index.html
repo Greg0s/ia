@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cellular automata</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+  </head>
+
+  <body>
+    <h1></h1>
+    <div class="toggle-box">
+      <p class="mode-label">centered</p>
+      <label class="switch">
+        <input type="checkbox" onclick="setMode()" autocomplete="off" />
+        <span class="slider round"></span>
+      </label>
+      <p class="mode-label">random</p>
+    </div>
+
+    <button class="generate" onclick="generate()">Change rule</button>
+    <main></main>
+    <footer>Emma Veauvy & Grégoire Tinnes</footer>
+  </body>
+</html>
