@@ -1,5 +1,6 @@
 {
 	"dependencies": {
+		"camera-controls": "^2.7.2",
 		"three": "^0.156.1"
 	},
 	"devDependencies": {

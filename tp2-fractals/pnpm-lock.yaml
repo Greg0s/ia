@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  camera-controls:
+    specifier: ^2.7.2
+    version: 2.7.2(three@0.156.1)
   three:
     specifier: ^0.156.1
     version: 0.156.1
@@ -213,6 +216,14 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /camera-controls@2.7.2(three@0.156.1):
+    resolution: {integrity: sha512-6+gaZFK3LYbWaXC94EN0BYLlvpo9xfUqwp59vsU3nV7WXIU05q4wyP5TOgyG1tqTHReuBofb20vKfZNBNjMtzw==}
+    peerDependencies:
+      three: '>=0.126.1'
+    dependencies:
+      three: 0.156.1
+    dev: false
 
   /esbuild@0.18.20:
     resolution: {integrity: sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA==}
