@@ -1,0 +1,36 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  camera-controls:
+    specifier: ^2.7.2
+    version: 2.7.2(three@0.156.1)
+  three:
+    specifier: ^0.156.1
+    version: 0.156.1
+
+devDependencies:
+  dat.gui:
+    specifier: ^0.7.9
+    version: 0.7.9
+
+packages:
+
+  /camera-controls@2.7.2(three@0.156.1):
+    resolution: {integrity: sha512-6+gaZFK3LYbWaXC94EN0BYLlvpo9xfUqwp59vsU3nV7WXIU05q4wyP5TOgyG1tqTHReuBofb20vKfZNBNjMtzw==}
+    peerDependencies:
+      three: '>=0.126.1'
+    dependencies:
+      three: 0.156.1
+    dev: false
+
+  /dat.gui@0.7.9:
+    resolution: {integrity: sha512-sCNc1OHobc+Erc1HqiswYgHdVNpSJUlk/Hz8vzOCsER7rl+oF/4+v8GXFUyCgtXpoCX6+bnmg07DedLvBLwYKQ==}
+    dev: true
+
+  /three@0.156.1:
+    resolution: {integrity: sha512-kP7H0FK9d/k6t/XvQ9FO6i+QrePoDcNhwl0I02+wmUJRNSLCUIDMcfObnzQvxb37/0Uc9TDT0T1HgsRRrO6SYQ==}
+    dev: false
