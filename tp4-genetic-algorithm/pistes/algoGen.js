@@ -69,36 +69,6 @@ function mutate(individual, mutationRate) {
   }
 }
 
-// Fonction pour afficher le paysage adaptatif sur le canvas
-function drawLandscape(population, canvas) {
-  const ctx = canvas.getContext("2d");
-  const width = canvas.width;
-  const height = canvas.height;
-
-  // Effacer le canvas
-  ctx.clearRect(0, 0, width, height);
-
-  // Dessiner la ligne de la fonction objectif
-  ctx.strokeStyle = "blue";
-  ctx.beginPath();
-  ctx.moveTo(0, height);
-  for (let x = 0; x < width; x++) {
-    const y = height - fitnessFunction((x / width) * 10) * 20;
-    ctx.lineTo(x, y);
-  }
-  ctx.stroke();
-
-  // Dessiner les individus de la population
-  ctx.fillStyle = "red";
-  for (const individual of population) {
-    const x = (individual.chromosome / 10) * width;
-    const y = height - (individual.fitness - -10) * (height / 20); // Modifier cette ligne
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
-
 // Algorithme génétique principal avec affichage du paysage adaptatif
 function geneticAlgorithmWithAdaptiveLandscape(
   popSize,
@@ -128,7 +98,7 @@ function geneticAlgorithmWithAdaptiveLandscape(
     population = newPopulation;
 
     if (gen % adaptiveLandscapeInterval === 0) {
-      drawLandscape(population, canvas);
+      displayFitnessMap(population, canvas);
     }
   }
 
