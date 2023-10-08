@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8" />
+    <title>Genetic algorithm - Fitness landscape</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        height: 100%;
+        font-family: "Roboto", sans-serif;
+      }
+      p,
+      h2 {
+        margin: 0;
+      }
+      .descr {
+        position: absolute;
+        bottom: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+      }
+      .best {
+        display: flex;
+        justify-content: space-between;
+        align-content: flex-start;
+        gap: 1rem;
+      }
+      .results {
+        text-align: end;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+    </style>
+    <script type="module" crossorigin src="./assets/index-984c2746.js"></script>
+  </head>
+  <body>
+    <div id="output"></div>
+    <div class="descr">
+      <h1>Additive fitness landscape</h1>
+      <div class="best">
+        <div>
+          <h2>Best individual</h2>
+          <p>as x - <span class="target-value"></span> → 0</p>
+        </div>
+
+        <div class="results">
+          <p>Chromosome: <span class="chromosome"></span></p>
+          <p>Fitness: <span class="fitness"></span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
