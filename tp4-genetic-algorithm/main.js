@@ -26,8 +26,10 @@ let popSize = 400;
 let generations = 200;
 let mutationRate = 0.1;
 
-let materialFacesColor = 0x0f0fff;
+let materialFacesColor = 0x84;
 let targetValue = 0.5;
+let landscapeNb = 10;
+let factor = 2;
 
 const chromosomeHTML = document.querySelector(".chromosome");
 const fitnessHTML = document.querySelector(".fitness");
@@ -36,12 +38,14 @@ const targetValueHTML = document.querySelector(".target-value");
 // GUI
 const gui = new GUI();
 const params = {
-  color: 0x0f0fff,
+  color: 0x84,
   reload: () => reload(),
   popSize: 400,
   generations: 200,
   mutationRate: 0.1,
   targetValue: 0.5,
+  landscapeNb: 10,
+  factor: 2,
 };
 const fitnessLandscape = gui.addFolder("Fitness landscape");
 fitnessLandscape.open();
@@ -81,6 +85,20 @@ fitnessLandscape
     materialFacesColor = newColor;
   })
   .name("Color");
+fitnessLandscape
+  .add(params, "landscapeNb", 1, 20, 1)
+  .listen()
+  .onChange(function (value) {
+    landscapeNb = value;
+  })
+  .name("Iterations");
+fitnessLandscape
+  .add(params, "factor", 0.5, 5, 0.5)
+  .listen()
+  .onChange(function (value) {
+    factor = value;
+  })
+  .name("Factor");
 
 function clearScene() {
   while (scene.children.length > 0) {
@@ -169,7 +187,7 @@ function displayFitnessMap(population) {
       if (i * gridSize + j < population.length) {
         const fitness = population[i * gridSize + j].fitness;
         vertices[i * gridSize * 3 + j * 3] = x;
-        vertices[i * gridSize * 3 + j * 3 + 1] += fitness * 2; // Use fitness for the Y component
+        vertices[i * gridSize * 3 + j * 3 + 1] += fitness * factor; // Use fitness for the Y component
         vertices[i * gridSize * 3 + j * 3 + 2] = z;
       }
     }
@@ -383,7 +401,7 @@ function geneticAlgorithmWithAdaptiveLandscape(
   mutationRate
 ) {
   let population = generatePopulation(popSize);
-  const adaptiveLandscapeInterval = Math.floor(generations / 10); // Display adaptive landscape every 10 generations
+  const adaptiveLandscapeInterval = Math.floor(generations / landscapeNb); // Display adaptive landscape every 10 generations
 
   for (let gen = 0; gen < generations; gen++) {
     evaluatePopulation(population); // Update population fitness
