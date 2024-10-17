@@ -60,6 +60,17 @@ a:hover {
   padding: 1.3rem;
 }
 
+#main-site {
+  opacity: 0.7;
+  color: #f18b63;
+}
+
+.line {
+  width: 100%;
+  border-top: 1px solid #676f77;
+  opacity: 0.6;
+}
+
 label {
   font-size: 0.8rem;
   display: flex;
